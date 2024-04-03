@@ -4288,6 +4288,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1313656419}
   point: {fileID: 212319230}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  health: 3
   radius: 0.15
   speed: 5
   jumpForce: 10
@@ -4356,7 +4360,7 @@ GameObject:
   - component: {fileID: 498062977}
   - component: {fileID: 498062976}
   - component: {fileID: 498062981}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4375,6 +4379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65565295ce647ec4bb2d9a8c58066111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   speed: -1.5
   point: {fileID: 2023026051}
   radius: 0.12
@@ -4415,7 +4420,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000029802322, y: -0.23995739}
+  m_Offset: {x: 0, y: -0.3236579}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4426,7 +4431,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2341046, y: 0.5200852}
+  m_Size: {x: 1.2341046, y: 0.68748623}
   m_EdgeRadius: 0
 --- !u!212 &498062979
 SpriteRenderer:

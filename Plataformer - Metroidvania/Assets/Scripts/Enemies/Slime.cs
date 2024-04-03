@@ -5,6 +5,9 @@ using UnityEngine;
 public class Slime : MonoBehaviour
 {
     private Rigidbody2D rig;
+    private Animator anim;
+
+    public int health;
     public float speed;
 
     public Transform point;
@@ -14,6 +17,7 @@ public class Slime : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,6 +48,19 @@ public class Slime : MonoBehaviour
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
             }
+        }
+    }
+
+    public void OnHit()
+    {
+        anim.SetTrigger("hit");
+        health--;
+        
+        if(health <= 0)
+        {
+            speed = 0;
+            anim.SetTrigger("dead");
+            Destroy(gameObject, 1f);
         }
     }
 
