@@ -4653,8 +4653,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204f92f4fa9ea674895fc5980f0ee0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRight: 1
+  stopDistance: 0.7
   point: {fileID: 1189207937}
-  speed: 0
+  speed: 2
   maxVision: 3
 --- !u!50 &1157377835
 Rigidbody2D:

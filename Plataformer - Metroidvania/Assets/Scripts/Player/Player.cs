@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     private bool doubleJump;
     private bool isAttacking;
 
+    private bool recovery;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,14 +113,22 @@ public class Player : MonoBehaviour
         isAttacking = false;
     }
 
-
-    void OnHit()
+    float recoveryCount;
+    public void OnHit()
     {
-        anim.SetTrigger("hit");
-        health--;
+        recoveryCount += Time.deltaTime;
 
-        if(health <= 0)
+        if(recoveryCount >= 2f)
         {
+            anim.SetTrigger("hit");
+            health--;
+
+            recoveryCount = 0f;
+        }
+
+        if(health <= 0 && !recovery)
+        {
+            recovery = true;
             anim.SetTrigger("dead");
             //game over aq
         }
