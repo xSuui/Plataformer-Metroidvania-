@@ -5,6 +5,8 @@ using UnityEngine;
 public class Goblin : MonoBehaviour
 {
     private Rigidbody2D rig;
+    private Animator anim;
+
     private bool isFront;
     private Vector2 direction;
 
@@ -12,6 +14,7 @@ public class Goblin : MonoBehaviour
     public float stopDistance;
 
     public Transform point;
+    public Transform behind;
 
     public float speed;
     public float maxVision;
@@ -20,6 +23,7 @@ public class Goblin : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         if (isRight) //vira pra direita
         {
@@ -33,12 +37,7 @@ public class Goblin : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+  
     void FixedUpdate()
     {
         GetPlayer();
@@ -50,6 +49,8 @@ public class Goblin : MonoBehaviour
     {
         if(isFront)
         {
+            anim.SetInteger("transition", 1);
+
             if (isRight) //vira pra direita
             {
                 transform.eulerAngles = new Vector2(0, 0);
@@ -82,8 +83,21 @@ public class Goblin : MonoBehaviour
                     isFront = false;
                     rig.velocity = Vector2.zero;
 
+                    anim.SetInteger("transition", 2);
+
                     hit.transform.GetComponent<Player>().OnHit();
                 }
+            }
+        }
+
+        RaycastHit2D behindHit = Physics2D.Raycast(behind.position, -direction, maxVision);
+
+        if(behindHit.collider != null)
+        {
+            if(behindHit.transform.CompareTag("Player"))
+            {
+                //player está nas costas do inimigo
+                isRight = !isRight;
             }
         }
     }
@@ -91,5 +105,10 @@ public class Goblin : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawRay(point.position, direction * maxVision);
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(behind.position, -direction * maxVision);
     }
 }
