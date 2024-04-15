@@ -4599,7 +4599,7 @@ GameObject:
   - component: {fileID: 1157377835}
   - component: {fileID: 1157377834}
   - component: {fileID: 1157377837}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4685,6 +4685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204f92f4fa9ea674895fc5980f0ee0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   isRight: 1
   stopDistance: 0.7
   point: {fileID: 1189207937}
