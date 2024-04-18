@@ -161,5 +161,12 @@ public class Player : MonoBehaviour
         {
             OnHit();
         }
+
+        if(collision.CompareTag("Coin"))
+        {
+            collision.GetComponent<Animator>().SetTrigger("hit");
+            GameController.instance.GetCoin();
+            Destroy(collision.gameObject, 0.4f);
+        }
     }
 }
