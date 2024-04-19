@@ -4214,7 +4214,7 @@ GameObject:
   - component: {fileID: 326619096}
   - component: {fileID: 326619099}
   - component: {fileID: 326619100}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4530,6 +4530,7 @@ GameObject:
   - component: {fileID: 1052240445}
   - component: {fileID: 1052240447}
   - component: {fileID: 1052240448}
+  - component: {fileID: 1052240449}
   m_Layer: 0
   m_Name: buttom
   m_TagString: Untagged
@@ -4597,7 +4598,7 @@ Transform:
   m_GameObject: {fileID: 1052240444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.47, y: 1.562, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.55, y: 1.55, z: 1.55}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -4627,7 +4628,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.76001835, y: -0.13027108}
+    - - {x: -0.8134966, y: -0.11167002}
       - {x: -0.5918412, y: -0.14610362}
       - {x: 0.5, y: -0.125}
       - {x: 0.4982319, y: 0.021021962}
@@ -4652,6 +4653,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1052240449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052240444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df9cd5a1fa02ab41bd25dc8010a38ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrierAnim: {fileID: 1380580103}
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
+  radius: 0.7
 --- !u!1 &1274046951
 GameObject:
   m_ObjectHideFlags: 0
@@ -5400,9 +5418,9 @@ GameObject:
   - component: {fileID: 2145850747}
   - component: {fileID: 2145850750}
   - component: {fileID: 2145850749}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: stone
-  m_TagString: Untagged
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
