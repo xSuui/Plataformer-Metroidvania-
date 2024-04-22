@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Plataformer - Metroidvania.unity
+    path: Assets/Scenes/Lvl_1.unity
     guid: 9eb0da0dd11f99948847e6d15f88beb7
   m_configObjects: {}
