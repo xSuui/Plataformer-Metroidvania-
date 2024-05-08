@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -13,12 +14,16 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
     }
 
     public void GetCoin()
     {
         score++;
         scoreText.text = "x " + score.ToString();
+    }
+
+    public void NextLvl()
+    {
+        SceneManager.LoadScene(1);
     }
 }

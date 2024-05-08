@@ -21,6 +21,22 @@ public class Player : MonoBehaviour
 
     private bool recovery;
 
+
+    private static Player instance;
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+
+        if(instance == null)
+        {
+            instance = null;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -167,6 +183,11 @@ public class Player : MonoBehaviour
             collision.GetComponent<Animator>().SetTrigger("hit");
             GameController.instance.GetCoin();
             Destroy(collision.gameObject, 0.4f);
+        }
+
+        if(collision.gameObject.layer == 9)
+        {
+            GameController.instance.NextLvl();
         }
     }
 }
