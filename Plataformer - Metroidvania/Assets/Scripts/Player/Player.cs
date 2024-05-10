@@ -169,6 +169,11 @@ public class Player : MonoBehaviour
         {
             isJumping = false;
         }
+
+        if(colisor.gameObject.layer == 10)
+        {
+            PlayerPos.instance.Checkpoint();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
