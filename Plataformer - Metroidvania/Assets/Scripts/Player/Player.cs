@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class Player : MonoBehaviour
     public Transform point;
 
     public LayerMask enemyLayer;
+
+    public float recoveryTime;
+
+    [Header("UI")]
+    public Text scoreText;
+    public GameObject gameOver;
 
     private Health healthSystem;
 
@@ -24,12 +31,12 @@ public class Player : MonoBehaviour
     private bool recovery;
 
 
-    private static Player instance;
+    public static Player instance;
     private void Awake()
     {
         if (instance == null)
         {
-            instance = null;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
@@ -151,23 +158,31 @@ public class Player : MonoBehaviour
     float recoveryCount;
     public void OnHit()
     {
-        recoveryCount += Time.deltaTime;
-
-        if(recoveryCount >= 2f)
+        if(!recovery)
         {
             anim.SetTrigger("hit");
             healthSystem.health--;
 
-            recoveryCount = 0f;
+            if (healthSystem.health <= 0)
+            {
+                recovery = true;
+                anim.SetTrigger("dead");
+                //game over aq
+                GameController.instance.ShowGameOver();
+            }
         }
-
-        if(healthSystem.health <= 0 && !recovery)
+        else
         {
-            recovery = true;
-            anim.SetTrigger("dead");
-            //game over aq
-            GameController.instance.ShowGameOver();
+            StartCoroutine(Recover());
         }
+        
+    }
+
+    private IEnumerator Recover()
+    {
+        recovery = true;
+        yield return new WaitForSeconds(recoveryTime);
+        recovery = false;
     }
 
     void OnDrawGizmos()
@@ -177,7 +192,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D colisor)
     {
-        if(colisor.gameObject.layer == 6)
+        if(colisor.gameObject.layer == 6 || colisor.gameObject.layer == 11)
         {
             isJumping = false;
         }
@@ -201,11 +216,6 @@ public class Player : MonoBehaviour
             collision.GetComponent<Animator>().SetTrigger("hit");
             GameController.instance.GetCoin();
             Destroy(collision.gameObject, 0.4f);
-        }
-
-        if(collision.gameObject.layer == 9)
-        {
-            GameController.instance.NextLvl();
         }
     }
 }
