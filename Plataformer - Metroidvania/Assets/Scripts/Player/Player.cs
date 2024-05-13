@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rig;
+    private PlayerAudio playerAudio;
     public Animator anim;
     public Transform point;
 
@@ -41,6 +42,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+
+        playerAudio = GetComponent<PlayerAudio>();
     }
 
     // Update is called once per frame
@@ -95,12 +98,14 @@ public class Player : MonoBehaviour
                 rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 isJumping = true;
                 doubleJump = true;
+                playerAudio.PlaySFX(playerAudio.jumpSound);
             }
             else if(doubleJump)
             {
                 anim.SetInteger("Transition", 2);
                 rig.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 doubleJump = false;
+                playerAudio.PlaySFX(playerAudio.jumpSound);
             }
         }
     }
@@ -114,7 +119,9 @@ public class Player : MonoBehaviour
 
             Collider2D hit = Physics2D.OverlapCircle(point.position, radius, enemyLayer);
 
-            if(hit != null)
+            playerAudio.PlaySFX(playerAudio.hitSound);
+
+            if (hit != null)
             {
                 if(hit.GetComponent<Slime>())
                 {
@@ -185,6 +192,7 @@ public class Player : MonoBehaviour
 
         if(collision.CompareTag("Coin"))
         {
+            playerAudio.PlaySFX(playerAudio.coinSound);
             collision.GetComponent<Animator>().SetTrigger("hit");
             GameController.instance.GetCoin();
             Destroy(collision.gameObject, 0.4f);
