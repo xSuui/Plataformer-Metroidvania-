@@ -14,12 +14,20 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        if(PlayerPrefs.GetInt("score") > 0)
+        {
+            score = PlayerPrefs.GetInt("score");
+            scoreText.text = "x " + score.ToString();
+        }
     }
 
     public void GetCoin()
     {
         score++;
         scoreText.text = "x " + score.ToString();
+
+        PlayerPrefs.SetInt("score", score);
     }
 
     public void NextLvl()
