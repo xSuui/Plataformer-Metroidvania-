@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.layer == 7)
         {
@@ -217,5 +217,52 @@ public class Player : MonoBehaviour
             GameController.instance.GetCoin();
             Destroy(collision.gameObject, 0.4f);
         }
+    }*/
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log($"Colisão com: {collision.name}");
+
+        if (collision.gameObject.layer == 7)
+        {
+            //Debug.Log("Chamando OnHit()");
+            OnHit();
+        }
+
+        if (collision.CompareTag("Coin"))
+        {
+            //Debug.Log("Colisão com moeda detectada");
+
+            if (playerAudio == null)
+            {
+                //Debug.LogError("playerAudio está null!");
+            }
+            else
+            {
+                playerAudio.PlaySFX(playerAudio.coinSound);
+            }
+
+            Animator anim = collision.GetComponent<Animator>();
+            if (anim != null)
+            {
+                anim.SetTrigger("hit");
+            }
+            else
+            {
+                //Debug.LogWarning($"Objeto {collision.name} não possui Animator.");
+            }
+
+            if (GameController.instance == null)
+            {
+                //Debug.LogError("GameController.instance está null!");
+            }
+            else
+            {
+                GameController.instance.GetCoin();
+            }
+
+            Destroy(collision.gameObject, 0.4f);
+        }
     }
+
 }

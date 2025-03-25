@@ -12,6 +12,20 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this; // Corrigido! Agora 'instance' recebe a referência correta.
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject); // Agora ele destrói apenas este objeto, não a instância existente.
+        }
+    }
+
+
+    /*private void Awake()
+    {
         //instance = this;
 
         if (instance == null)
@@ -25,7 +39,7 @@ public class GameController : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
+    }*/
 
     private void Start()
     {
