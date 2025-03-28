@@ -17,6 +17,11 @@ public class PlayerAudio : MonoBehaviour
     
     public void PlaySFX(AudioClip sfx)
     {
-        audioSource.PlayOneShot(sfx);
+        if (!AudioListener.pause) // Toca o som apenas se o áudio não estiver pausado
+        {
+            audioSource.PlayOneShot(sfx);
+        }
+
+        //audioSource.PlayOneShot(sfx);
     }
 }
